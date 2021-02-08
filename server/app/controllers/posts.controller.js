@@ -1,12 +1,17 @@
 const db = require("../models");
-const User = db.user;
 const Post = db.post;
 
-
 exports.addPost = (req, res) => {
+  const { title, content} = req.body;
+
+  if(!title || ! content){
+    res.status(500).send({ message: "Title and content require" });
+    return;
+  }
+  
   const post = new Post({
-    title: req.body.title,
-    content: req.body.content,
+    title: title,
+    content: content,
     author: req.userId,
     date: new Date()
   });
