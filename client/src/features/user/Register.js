@@ -8,50 +8,51 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Form
-      name="normal_login"
-      className={styles.loginForm}
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish}
-    >
-      <Form.Item
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Username!",
-          },
-        ]}
+    <div className={styles.center}>
+      <Form
+        name="normal_login"
+        className={styles.loginForm}
+        onFinish={onFinish}
       >
-        <Input
-          prefix={<UserOutlined className={styles.siteFormItemIcon} />}
-          placeholder="Username"
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Password!",
-          },
-        ]}
-      >
-        <Input
-          prefix={<LockOutlined className={styles.siteFormItemIcon} />}
-          type="password"
-          placeholder="Password"
-        />
-        <Button
-          type="primary"
-          htmlType="submit"
-          className={styles.loginFormButton}
+        <Form.Item
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Username!",
+            },
+          ]}
         >
-          Log in
-        </Button>
-      </Form.Item>
-    </Form>
+          <Input
+            prefix={<UserOutlined className={styles.siteFormItemIcon} />}
+            placeholder="Username"
+          />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Password!",
+            },
+          ]}
+        >
+          <Input
+            prefix={<LockOutlined className={styles.siteFormItemIcon} />}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className={styles.loginFormButton}
+          >
+            Log in
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };

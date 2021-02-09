@@ -1,5 +1,11 @@
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 .loginForm {
-  max-width: 300px;
+  width: 20%;
 }
 
 .loginFormButton {
