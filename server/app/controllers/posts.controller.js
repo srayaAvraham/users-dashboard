@@ -2,18 +2,18 @@ const db = require("../models");
 const Post = db.post;
 
 exports.addPost = (req, res) => {
-  const { title, content} = req.body;
+  const { title, content } = req.body;
 
-  if(!title || ! content){
+  if (!title || !content) {
     res.status(500).send({ message: "Title and content require" });
     return;
   }
-  
+
   const post = new Post({
     title: title,
     content: content,
     author: req.userId,
-    date: new Date()
+    date: new Date(),
   });
   post.save((err) => {
     if (err) {
@@ -21,7 +21,7 @@ exports.addPost = (req, res) => {
       return;
     }
     res.send({ message: "Post was added successfully!" });
-  })
+  });
 };
 
 exports.getUserPosts = (req, res) => {
@@ -32,7 +32,6 @@ exports.getUserPosts = (req, res) => {
       res.status(500).send({ message: err });
       return;
     }
-  res.send(posts);
-  
-});
-}
+    res.send(posts);
+  });
+};
