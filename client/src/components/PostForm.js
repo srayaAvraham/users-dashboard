@@ -2,10 +2,10 @@ import React, { useState } from "react";
 // import styles from "./Posts.module.css";
 import { Form, Input, Button } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
+const { TextArea } = Input;
 export const PostForm = ({ form }) => {
   return (
     <section>
-      <h2>Add a New Post</h2>
       <Form name="add_post" form={form}>
         <Form.Item
           name="title"
@@ -27,7 +27,7 @@ export const PostForm = ({ form }) => {
             },
           ]}
         >
-          <Input prefix={<LockOutlined />} type="text" placeholder="Content" />
+          <TextArea rows={4} type="text" placeholder="Content" />
         </Form.Item>
       </Form>
     </section>

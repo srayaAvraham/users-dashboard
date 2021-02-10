@@ -31,7 +31,7 @@ export const AddPostForm = () => {
   };
 
   return (
-    <AppModal handleSave={onFinish}>
+    <AppModal handleSave={onFinish} title="Add a New Post">
       <PostForm form={form} />
     </AppModal>
   );

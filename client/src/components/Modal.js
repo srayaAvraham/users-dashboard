@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
 
-export const AppModal = ({ children, handleSave }) => {
+export const AppModal = ({ children, handleSave, title }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -23,7 +23,7 @@ export const AppModal = ({ children, handleSave }) => {
         Add Post
       </Button>
       <Modal
-        title="Basic Modal"
+        title={title}
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
