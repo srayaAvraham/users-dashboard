@@ -27,6 +27,7 @@ export const userSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.user = action.payload;
+      localStorage.setItem("token", action.payload.accessToken)
     },
     [login.rejected]: (state, action) => {
       state.status = "failed";
