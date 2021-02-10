@@ -15,12 +15,12 @@ exports.addPost = (req, res) => {
     author: req.userId,
     date: new Date(),
   });
-  post.save((err) => {
+  post.save((err, post) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    res.send({ message: "Post was added successfully!" });
+    res.send({ message: "Post was added successfully!", post });
   });
 };
 

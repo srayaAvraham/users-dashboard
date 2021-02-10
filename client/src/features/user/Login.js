@@ -1,16 +1,28 @@
 import { Form, Input, Button } from "antd";
-import { LockOutlined , MailOutlined} from "@ant-design/icons";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link, useHistory } from "react-router-dom";
 import styles from "./User.module.css";
 import { useDispatch } from "react-redux";
 import { login } from "./userSlice";
+import { useState } from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const onFinish = (values) => {
-    dispatch(login(values));
-    history.push("/")
+  const [addRequestStatus, setAddRequestStatus] = useState("idle");
+
+  const onFinish = async (values) => {
+    try {
+      setAddRequestStatus("pending");
+      const resultAction = await dispatch(login(values));
+      unwrapResult(resultAction);
+      history.push("/");
+    } catch (err) {
+      console.error("Failed to login: ", err);
+    } finally {
+      setAddRequestStatus("idle");
+    }
   };
 
   return (
@@ -54,6 +66,7 @@ export const LoginForm = () => {
             type="primary"
             htmlType="submit"
             className={styles.loginFormButton}
+            loading={addRequestStatus === "pending"}
           >
             Log in
           </Button>
