@@ -3,10 +3,14 @@ import api from "../../helpers/api";
 
 export const login = createAsyncThunk(
   "user/login",
-  async ({ email, password }) => {
-    const res = await api.post("/auth/signin", { email, password });
-    console.log(res);
-    return res.data;
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const res = await api.post("/auth/signin", { email, password });
+      console.log(res);
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
   }
 );
 
@@ -26,17 +30,10 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: {
-    [login.pending]: (state, action) => {
-      state.status = "loading";
-    },
     [login.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.user = action.payload;
       localStorage.setItem("user", JSON.stringify(action.payload));
-    },
-    [login.rejected]: (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
     },
   },
 });

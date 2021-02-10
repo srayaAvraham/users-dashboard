@@ -9,6 +9,7 @@ import { useState } from "react";
 export const RegisterForm = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const onFinish = async (values) => {
     try {
       setLoading(true);
@@ -17,7 +18,7 @@ export const RegisterForm = () => {
       setLoading(false);
     } catch (err) {
       setLoading(false);
-      console.log(err.response.data.message);
+      setError(err.response.data.message);
     }
   };
 
@@ -85,7 +86,7 @@ export const RegisterForm = () => {
             Register
           </Button>
         </Form.Item>
-        <Alert message="Error Text" type="error" />
+        {error && <Alert message={error} type="error" />}
       </Form>
     </div>
   );

@@ -21,6 +21,7 @@ export const AddPostForm = () => {
         setAddRequestStatus("pending");
         const resultAction = await dispatch(addNewPost(values));
         unwrapResult(resultAction);
+        console.log(resultAction);
       } catch (err) {
         console.error("Failed to save the post: ", err);
       } finally {

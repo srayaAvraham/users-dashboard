@@ -1,4 +1,4 @@
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Alert } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Link, useHistory } from "react-router-dom";
 import styles from "./User.module.css";
@@ -11,7 +11,7 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [addRequestStatus, setAddRequestStatus] = useState("idle");
-
+  const [error, setError] = useState(null);
   const onFinish = async (values) => {
     try {
       setAddRequestStatus("pending");
@@ -20,6 +20,7 @@ export const LoginForm = () => {
       history.push("/");
     } catch (err) {
       console.error("Failed to login: ", err);
+      setError(err.message);
     } finally {
       setAddRequestStatus("idle");
     }
@@ -38,6 +39,10 @@ export const LoginForm = () => {
             {
               required: true,
               message: "Please input your Email!",
+            },
+            {
+              type: "email",
+              message: "is not a valid email!",
             },
           ]}
         >
@@ -72,6 +77,7 @@ export const LoginForm = () => {
           </Button>
           Or <Link to={"/register"}>register now!</Link>
         </Form.Item>
+        {error && <Alert message={error} type="error" />}
       </Form>
     </div>
   );
