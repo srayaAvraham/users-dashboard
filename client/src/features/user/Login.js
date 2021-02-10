@@ -10,12 +10,12 @@ import { unwrapResult } from "@reduxjs/toolkit";
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [addRequestStatus, setAddRequestStatus] = useState("idle");
+  const [loginRequestStatus, setLoginRequestStatus] = useState("idle");
   const [error, setError] = useState(null);
 
   const onFinish = async (values) => {
     try {
-      setAddRequestStatus("pending");
+      setLoginRequestStatus("pending");
       const resultAction = await dispatch(login(values));
       unwrapResult(resultAction);
       history.push("/");
@@ -23,7 +23,7 @@ export const LoginForm = () => {
       console.error("Failed to login: ", err);
       setError(err.message);
     } finally {
-      setAddRequestStatus("idle");
+      setLoginRequestStatus("idle");
     }
   };
 
@@ -72,7 +72,7 @@ export const LoginForm = () => {
             type="primary"
             htmlType="submit"
             className={styles.loginFormButton}
-            loading={addRequestStatus === "pending"}
+            loading={loginRequestStatus == "pending"}
           >
             Log in
           </Button>

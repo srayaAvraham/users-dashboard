@@ -12,7 +12,6 @@ api.interceptors.request.use(
       ? JSON.parse(localStorage.getItem("user"))
       : null;
     if (user) {
-      // config.headers["Authorization"] = `Token ${token}`;
       config.headers["x-access-token"] = user.accessToken;
     }
     return config;

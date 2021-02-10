@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
 
-export const AppModal = ({ children, handleSave, title }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+export const AppModal = ({ children, handleSave, title,isModalVisible,setIsModalVisible }) => {
+  
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const handleOk = () => {
-    setIsModalVisible(false);
     handleSave();
   };
 

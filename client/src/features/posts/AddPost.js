@@ -4,35 +4,38 @@ import { unwrapResult } from "@reduxjs/toolkit";
 
 import { addNewPost } from "./postsSlice";
 import styles from "./Posts.module.css";
-import { Form, Input, Button } from "antd";
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import { Form } from "antd";
 import { PostForm } from "../../components/PostForm";
 import { AppModal } from "../../components/Modal";
+
 export const AddPostForm = () => {
-  const [addRequestStatus, setAddRequestStatus] = useState("idle");
+    const [addRequestStatus, setAddRequestStatus] = useState("idle");
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [form] = Form.useForm();
+    const dispatch = useDispatch();
 
-  const [form] = Form.useForm();
-  const dispatch = useDispatch();
-  const formRef = useRef();
-  const onFinish = async () => {
-    form.validateFields().then(async (values) => {
-      form.resetFields();
-      try {
-        setAddRequestStatus("pending");
-        const resultAction = await dispatch(addNewPost(values));
-        unwrapResult(resultAction);
-        console.log(resultAction);
-      } catch (err) {
-        console.error("Failed to save the post: ", err);
-      } finally {
-        setAddRequestStatus("idle");
-      }
-    });
-  };
+    const onFinish = async () => {
+        form.validateFields().then(async (values) => {
+            form.resetFields();
+            try {
+                setAddRequestStatus("pending");
+                const resultAction = await dispatch(addNewPost(values));
+                unwrapResult(resultAction);
+            } catch (err) {
+                console.error("Failed to save the post: ", err);
+            } finally {
+                setAddRequestStatus("idle");
+                setIsModalVisible(false)
+            }
+        });
+    };
 
-  return (
-    <AppModal handleSave={onFinish} title="Add a New Post">
-      <PostForm form={form} />
-    </AppModal>
-  );
+    return (
+        <AppModal handleSave={onFinish}
+            isModalVisible={isModalVisible}
+            setIsModalVisible={setIsModalVisible}
+            title="Add a New Post">
+            <PostForm form={form} />
+        </AppModal>
+    );
 };

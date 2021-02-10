@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-// import styles from "./Posts.module.css";
-import { Form, Input, Button } from "antd";
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import React from "react";
+import { Form, Input } from "antd";
 const { TextArea } = Input;
 export const PostForm = ({ form }) => {
   return (
@@ -16,7 +14,7 @@ export const PostForm = ({ form }) => {
             },
           ]}
         >
-          <Input prefix={<MailOutlined />} placeholder="Title" />
+          <Input placeholder="Title" />
         </Form.Item>
         <Form.Item
           name="content"

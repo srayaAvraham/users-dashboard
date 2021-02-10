@@ -3,7 +3,6 @@ import api from "../../helpers/api";
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const response = await api.get("/post");
-  console.log(response);
   return response.data;
 });
 
@@ -29,7 +28,6 @@ export const postsSlice = createSlice({
     },
     [fetchPosts.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      console.log("dsfsfs");
       state.posts = action.payload;
     },
     [fetchPosts.rejected]: (state, action) => {
@@ -37,7 +35,7 @@ export const postsSlice = createSlice({
       state.error = action.payload;
     },
     [addNewPost.fulfilled]: (state, action) => {
-      state.posts.push(action.payload);
+      state.posts = [action.payload].concat(state.posts);
     },
   },
 });

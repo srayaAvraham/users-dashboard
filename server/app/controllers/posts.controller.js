@@ -27,7 +27,7 @@ exports.addPost = (req, res) => {
 exports.getUserPosts = (req, res) => {
   Post.find({
     author: req.userId,
-  }).exec((err, posts) => {
+  }).sort({'date': 'desc'}).exec((err, posts) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
