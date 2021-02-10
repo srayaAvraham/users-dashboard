@@ -1,17 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import api from '../../helpers/api';
 
-export const login = createAsyncThunk("user/login", async () => {
-  // const res = await api.post('/api/auth/login/', { username, password })
-  return "herf374tr873uhf273yr3r2uf";
+export const login = createAsyncThunk("user/login", async ({ email, password }) => {
+  const res = await api.post('/auth/signin', { email, password })
+  console.log(res)
+  return res.data;
 });
 
-export const signup = createAsyncThunk(
-  "user/signup",
-  async ({ username, email, password }) => {
-    // const res = await api.post('/api/auth/signup/', { username, password })
-    return "signup";
-  }
-);
 
 export const userSlice = createSlice({
   name: "user",
@@ -36,12 +31,14 @@ export const userSlice = createSlice({
     [login.rejected]: (state, action) => {
       state.status = "failed";
       state.error = action.error.message;
-    },
+    }
   },
 });
 
 export const {} = userSlice.actions;
 
-export const selectCount = (state) => state.counter.value;
+export const selectUser = (state) => state.user.user;
+export const selectStatus = state => state.user.status;
+export const selectError = state => state.user.error;
 
 export default userSlice.reducer;
