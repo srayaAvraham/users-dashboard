@@ -20,7 +20,6 @@ export const LoginForm = () => {
       unwrapResult(resultAction);
       history.push("/");
     } catch (err) {
-      console.error("Failed to login: ", err);
       setError(err.message);
     } finally {
       setLoginRequestStatus("idle");

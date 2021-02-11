@@ -6,7 +6,6 @@ export const login = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const res = await api.post("/auth/signin", { email, password });
-      console.log(res);
       return res.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
