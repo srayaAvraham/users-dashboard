@@ -8,7 +8,6 @@ const api = axios.create({
 });
 api.interceptors.request.use(
   (config) => {
-    console.log();
     const user = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
       : null;

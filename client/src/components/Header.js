@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, selectUser } from "../features/user/userSlice";
-import { useHistory } from "react-router-dom";
 import { Layout, Button, Avatar } from "antd";
 
 const { Header } = Layout;
@@ -16,7 +15,6 @@ export const AppHeader = () => {
 
   const button = user ? (
     <div>
-      {" "}
       <Avatar
         style={{ backgroundColor: "#1890ff", verticalAlign: "middle" }}
         size="large"
@@ -29,7 +27,7 @@ export const AppHeader = () => {
         onClick={handleLogout}
       >
         Logout
-      </Button>{" "}
+      </Button>
     </div>
   ) : null;
   return (
