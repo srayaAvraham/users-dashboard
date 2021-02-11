@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Button } from "antd";
 
-export const AppModal = ({ children, handleSave, title,isModalVisible,setIsModalVisible }) => {
-  
-
+export const AppModal = ({
+  children,
+  handleSave,
+  title,
+  isModalVisible,
+  setIsModalVisible,
+  loading,
+}) => {
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -18,7 +23,7 @@ export const AppModal = ({ children, handleSave, title,isModalVisible,setIsModal
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick={showModal} loading={loading}>
         Add Post
       </Button>
       <Modal
