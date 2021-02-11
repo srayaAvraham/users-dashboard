@@ -1,13 +1,14 @@
 const axios = require("axios");
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/",
+  baseURL: process.env.REACT_APP_BASE_URL || "http://localhost:5000/api/",
   headers: {
     "Content-Type": "application/json",
   },
 });
 api.interceptors.request.use(
   (config) => {
+    console.log();
     const user = localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
       : null;
