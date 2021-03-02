@@ -2,8 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+const posts = require("./app/routes/posts.routes");
+const auth = require("./app/routes/auth.routes");
 require("dotenv").config();
-
+const db = require("./app/models");
 const PORT = process.env.PORT || 8080;
 
 let corsOptions = {
@@ -13,8 +15,6 @@ let corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const db = require("./app/models");
 
 db.mongoose
   .connect(
@@ -33,11 +33,10 @@ db.mongoose
   });
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to application." });
 });
-
-require("./app/routes/auth.routes")(app);
-require("./app/routes/posts.routes")(app);
+app.use("/api/post", posts);
+app.use("/api/auth", auth);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
