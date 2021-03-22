@@ -17,6 +17,17 @@ export const PostForm = ({ form }) => {
           <Input placeholder="Title" />
         </Form.Item>
         <Form.Item
+          name="description"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Description!",
+            },
+          ]}
+        >
+          <Input placeholder="Description" />
+        </Form.Item>
+        <Form.Item
           name="content"
           rules={[
             {

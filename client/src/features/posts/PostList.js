@@ -1,9 +1,14 @@
-import { List, PageHeader, Space } from "antd";
+import { List, PageHeader, Space, Avatar } from "antd";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAllPosts, fetchPosts } from "./postsSlice";
 import { AddPostForm } from "./AddPost";
-import { FieldTimeOutlined } from "@ant-design/icons";
+import {
+  FieldTimeOutlined,
+  StarOutlined,
+  LikeOutlined,
+  MessageOutlined,
+} from "@ant-design/icons";
 import moment from "moment";
 
 const IconText = ({ icon, text }) => (
@@ -16,7 +21,7 @@ const IconText = ({ icon, text }) => (
 export const PostsList = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
-
+  console.log(posts);
   const postStatus = useSelector((state) => state.posts.status);
 
   useEffect(() => {
@@ -47,13 +52,39 @@ export const PostsList = () => {
             key={item.title}
             actions={[
               <IconText
+                icon={StarOutlined}
+                text="156"
+                key="list-vertical-star-o"
+              />,
+              <IconText
+                icon={LikeOutlined}
+                text="156"
+                key="list-vertical-like-o"
+              />,
+              <IconText
+                icon={MessageOutlined}
+                text="2"
+                key="list-vertical-message"
+              />,
+              <IconText
                 icon={FieldTimeOutlined}
                 text={moment(item.date).fromNow()}
                 key="list-vertical-star-o"
               />,
             ]}
+            // extra={
+            // <img
+            //   width={272}
+            //   alt="logo"
+            //   src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+            // />
+            // }
           >
-            <List.Item.Meta title={<a href={item.href}>{item.title}</a>} />
+            <List.Item.Meta
+              avatar={<Avatar>{item.author.username}</Avatar>}
+              title={<a href={item.href}>{item.title}</a>}
+              description={item.description}
+            />
             {item.content}
           </List.Item>
         )}

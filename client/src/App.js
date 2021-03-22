@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import { PostsList } from "./features/posts/PostList";
 import { AppHeader } from "./components/Header";
+import { Editor } from "./features/editor/editor";
 
 const { Content, Footer, Header } = Layout;
 function App() {
@@ -35,6 +36,11 @@ function App() {
                 />
                 <Route exact path="/login" component={LoginForm} />
                 <Route exact path="/register" component={RegisterForm} />
+                <Route
+                  exact
+                  path="/editor"
+                  render={() => (user ? <Editor /> : <Redirect to="/login" />)}
+                />
               </Switch>
             </div>
           </Content>

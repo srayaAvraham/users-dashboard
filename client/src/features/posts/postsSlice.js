@@ -8,8 +8,8 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
 
 export const addNewPost = createAsyncThunk(
   "posts/addNewPost",
-  async ({ title, content }) => {
-    const response = await api.post("/post", { title, content });
+  async ({ title, description, content }) => {
+    const response = await api.post("/post", { title, description, content });
     return response.data.post;
   }
 );

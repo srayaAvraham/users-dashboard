@@ -1,5 +1,5 @@
 @import "~antd/dist/antd.css";
-
+@import "~quill/dist/quill.snow.css";
 .App {
   /* text-align: center; */
   height: 100vh;

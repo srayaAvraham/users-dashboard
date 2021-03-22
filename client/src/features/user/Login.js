@@ -18,7 +18,9 @@ export const LoginForm = () => {
       setLoginRequestStatus("pending");
       const resultAction = await dispatch(login(values));
       unwrapResult(resultAction);
-      history.push("/");
+      console.log(history);
+      history.goBack();
+      //history.push("/");
     } catch (err) {
       setError(err.message);
     } finally {

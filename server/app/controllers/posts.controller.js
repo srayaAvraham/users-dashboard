@@ -2,15 +2,18 @@ const db = require("../models");
 const Post = db.post;
 
 exports.addPost = (req, res) => {
-  const { title, content } = req.body;
+  const { title, description, content } = req.body;
 
-  if (!title || !content) {
-    res.status(500).send({ message: "Title and content require" });
+  if (!title || !content || !description) {
+    res
+      .status(500)
+      .send({ message: "Title and description and content require" });
     return;
   }
 
   const post = new Post({
     title: title,
+    description: description,
     content: content,
     author: req.userId,
     date: new Date(),
@@ -27,11 +30,40 @@ exports.addPost = (req, res) => {
 exports.getUserPosts = (req, res) => {
   Post.find({
     author: req.userId,
-  }).sort({'date': 'desc'}).exec((err, posts) => {
+  })
+    .populate("author")
+    .sort({ date: "desc" })
+    .exec((err, posts) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.send(posts);
+    });
+};
+
+exports.getPosts = (req, res) => {
+  Post.find()
+    .populate("author")
+    .sort({ date: "desc" })
+    .exec((err, posts) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.send(posts);
+    });
+};
+
+exports.addPermissinOnPost = (req, res) => {
+  Post.findOne({
+    author: req.userId,
+    id: req.id,
+  }).exec((err, post) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    res.send(posts);
+    res.send(post);
   });
 };
