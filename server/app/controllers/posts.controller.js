@@ -42,6 +42,20 @@ exports.getUserPosts = (req, res) => {
     });
 };
 
+exports.getPostById = (req, res) => {
+  Post.findOne({
+    id: req.id,
+  })
+    .populate("author")
+    .exec((err, post) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.send(post);
+    });
+};
+
 exports.getPosts = (req, res) => {
   Post.find()
     .populate("author")

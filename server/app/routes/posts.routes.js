@@ -3,6 +3,7 @@ const {
   addPost,
   // getUserPosts,
   // updatePost,
+  getPostById,
   getPosts,
   addPermissinOnPost,
 } = require("../controllers/posts.controller");
@@ -21,5 +22,6 @@ router.post("/", verifyToken, addPost);
 // router.put("/", verifyToken, updatePost);
 router.put("/permissin", verifyToken, addPermissinOnPost);
 router.get("/", verifyToken, getPosts);
+router.get("/:id", verifyToken, getPostById);
 
 module.exports = router;

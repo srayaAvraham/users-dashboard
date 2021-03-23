@@ -14,10 +14,19 @@ export const addNewPost = createAsyncThunk(
   }
 );
 
+export const getPostById = createAsyncThunk(
+  "posts/getPostById",
+  async ({ id }) => {
+    const response = await api.get(`/post/${id}`);
+    return response.data;
+  }
+);
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState: {
     posts: [],
+    byId: null,
     status: "idle",
     error: null,
   },
@@ -36,6 +45,9 @@ export const postsSlice = createSlice({
     },
     [addNewPost.fulfilled]: (state, action) => {
       state.posts = [action.payload].concat(state.posts);
+    },
+    [getPostById.fulfilled]: (state, action) => {
+      state.byId = action.payload;
     },
   },
 });

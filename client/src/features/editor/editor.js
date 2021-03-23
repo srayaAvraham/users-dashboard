@@ -22,8 +22,11 @@ import { selectUser } from "../user/userSlice";
 // import Icons from "quill/ui/icons";
 
 Quill.register("modules/cursors", QuillCursors);
-export const Editor = () => {
+
+export const Editor = (props) => {
+  console.log(props);
   const user = useSelector(selectUser);
+
   useEffect(() => {
     let quill = new Quill("#editor", {
       modules: {

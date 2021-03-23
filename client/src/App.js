@@ -38,7 +38,7 @@ function App() {
                 <Route exact path="/register" component={RegisterForm} />
                 <Route
                   exact
-                  path="/editor"
+                  path="/editor/:id"
                   render={() => (user ? <Editor /> : <Redirect to="/login" />)}
                 />
               </Switch>

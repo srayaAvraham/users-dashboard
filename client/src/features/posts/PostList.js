@@ -10,6 +10,7 @@ import {
   MessageOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -82,7 +83,7 @@ export const PostsList = () => {
           >
             <List.Item.Meta
               avatar={<Avatar>{item.author.username}</Avatar>}
-              title={<a href={item.href}>{item.title}</a>}
+              title={<Link to={`/editor/${item._id}`}>{item.title}</Link>}
               description={item.description}
             />
             {item.content}
