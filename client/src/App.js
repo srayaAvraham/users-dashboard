@@ -39,7 +39,8 @@ function App() {
                 <Route
                   exact
                   path="/editor/:id"
-                  render={() => (user ? <Editor /> : <Redirect to="/login" />)}
+                  component={user ? Editor : LoginForm}
+                  // render={() => (user ? <Editor /> : <Redirect to="/login" />)}
                 />
               </Switch>
             </div>
