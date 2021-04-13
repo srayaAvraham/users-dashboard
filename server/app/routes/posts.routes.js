@@ -20,7 +20,7 @@ router.use(function (req, res, next) {
 
 router.post("/", verifyToken, addPost);
 // router.put("/", verifyToken, updatePost);
-router.put("/permissin", verifyToken, addPermissinOnPost);
+router.put("/permissin", addPermissinOnPost);
 router.get("/", verifyToken, getPosts);
 router.get("/:id", verifyToken, getPostById);
 

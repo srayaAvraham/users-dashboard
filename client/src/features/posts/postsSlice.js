@@ -22,6 +22,13 @@ export const getPostById = createAsyncThunk(
   }
 );
 
+export const addPermission = createAsyncThunk(
+  "posts/addPermission",
+  async ({ id, userToAllow }) => {
+    const response = await api.put("/post/permission", { id, userToAllow });
+    return response.data;
+  }
+);
 export const postsSlice = createSlice({
   name: "posts",
   initialState: {

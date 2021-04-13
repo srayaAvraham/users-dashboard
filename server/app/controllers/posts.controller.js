@@ -71,13 +71,16 @@ exports.getPosts = (req, res) => {
 
 exports.addPermissinOnPost = (req, res) => {
   Post.findOne({
-    author: req.userId,
-    id: req.id,
-  }).exec((err, post) => {
+    author: req.body.userId,
+    _id: req.body.id,
+  }).exec(async (err, post) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    res.send(post);
+    console.log(post);
+    post.permissions.push({ userId: req.body.userToAllow, role: "edit" });
+    let savdPost = await post.save();
+    res.send(savdPost);
   });
 };
